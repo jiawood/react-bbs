@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 
 import Header from "./components/Header/Header";
-import Home from "./components/Home/Home";
+import Home from "./views/Home";
 import PostDetail from "./components/PostDetail/PostDetail";
 import CreatePost from "./components/CreatePost/CreatePost";
 import Login from "./components/Login/Login";
