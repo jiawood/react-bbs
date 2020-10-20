@@ -14,35 +14,40 @@ import CreatePost from "./components/CreatePost/CreatePost";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 
+import bcImg from "./assets/bgc.jpg";
+
+import "./App.scss";
+
 function App() {
   return (
     <div className="App">
       <div className="header-container">
         <Header></Header>
       </div>
-      <div className="main-content">
-        <Router>
-          <Switch>
-            <Route exact path="/">
-                <Home/>
-            </Route>
-            <Route path="/home">
-              <Home></Home>
-            </Route>
-            <Route path="/postdetail">
-              <PostDetail />
-            </Route>
-            <Route path="/createpost">
-              <CreatePost />
-            </Route>
-            <Route path="login">
-              <Login />
-            </Route>
-            <Route path="register">
-              <Register />
-            </Route>
-          </Switch>
-        </Router>
+      <div className="img">
+        <img src={bcImg} alt=""/>
+      </div>
+      <div className="content">
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route path="/home">
+            <Home></Home>
+          </Route>
+          <Route path="/postdetail">
+            <PostDetail />
+          </Route>
+          <Route path="/createpost">
+            <CreatePost />
+          </Route>
+          <Route path="login">
+            <Login />
+          </Route>
+          <Route path="register">
+            <Register />
+          </Route>
+        </Switch>
       </div>
     </div>
   );

@@ -1,11 +1,16 @@
-const initState = {};
+const initState = {
+  isLogined: false,
+  loginedUser: {
+    name:'xiaiJne'
+  }
+};
 
 const userReducer = (state = initState, action) => {
   switch (action.type) {
     case "":
       return;
     default:
-      return;
+      return state;
   }
 };
 

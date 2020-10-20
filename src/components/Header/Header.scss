@@ -1,0 +1,47 @@
+.header {
+  position: relative;
+  // width: 100vw;
+  height: 45px;
+  background-color: white;
+  .header-container {
+    height: 45px;
+    // padding: 0 50px;
+    background-color: white;
+    width: 1154px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    // overflow: hidden;
+    .left-log {
+      float: left;
+      height: 45px;
+      width: 300px;
+      span {
+        line-height: 45px;
+        font-size: 30px;
+        font-weight: 800;
+        color: rgb(77, 82, 86);
+        cursor: pointer;
+      }
+    }
+    .right-login {
+      float: right;
+      height: 45px;
+      width: 300px;
+      .logined,
+      .no-logined {
+        height: 25px;
+        padding: 10px 0;
+        div {
+          line-height: 25px;
+          margin-right: 20px;
+          color: rbg(85, 85, 102);
+          float: right;
+          cursor: pointer;
+          font-size: 15px;
+        }
+      }
+    }
+  }
+}
