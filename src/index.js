@@ -5,6 +5,9 @@ import { createStore } from "redux";
 import rootReducer from "./reducers/rootReducer";
 import { BrowserRouter as Router } from "react-router-dom";
 
+//导入antd样式
+import 'antd/dist/antd.css';
+
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 

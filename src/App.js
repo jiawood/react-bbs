@@ -13,6 +13,7 @@ import PostDetail from "./components/PostDetail/PostDetail";
 import CreatePost from "./components/CreatePost/CreatePost";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
+// import 'antd/dist/antd.css'
 
 import bcImg from "./assets/bgc.jpg";
 

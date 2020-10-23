@@ -4,6 +4,10 @@ import { Button } from 'antd';
 import { useHistory } from "react-router-dom";
 import './HomeTop.scss'
 
+// //导入antd样式
+// import zhCN from 'antd/es/locale/zh_CN';
+// import 'antd/dist/antd.css';
+
 const HomeTop = () => {
   const isLogined = useSelector(state => state.isLogined)
   const loginedUser = useSelector(state => state.loginedUser)
