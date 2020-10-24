@@ -1,0 +1,126 @@
+.post-detail {
+  min-width: 490px;
+  max-width: 800px;
+  position: relative;
+  left: 0;
+  right: 0;
+  margin-top: 15px;
+  margin: auto;
+  padding-top: 15px;
+  xoverflow: hidden;
+  .header {
+    height: 100px;
+    padding: 20px 10px 20px 10px;
+    position: relative;
+    box-sizing: border-box;
+    background-color: white;
+    border-bottom: 1px solid rgb(188, 188, 188);
+    .title {
+      height: 36px;
+      xdisplay: inline-block;
+      line-height: 26px;
+      font-size: 24px;
+      padding: 0 0 10px 0;
+      box-sizing: border-box;
+      color: black;
+    }
+    .message {
+      display: inline-block;
+      height: 16px;
+      line-height: 16px;
+      font-size: 12.5px;
+      color: #999;
+      .name {
+        color: black;
+      }
+    }
+    .avator {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      height: 70px;
+      width: 70px;
+      xborder: 1px solid gray;
+      overflow: hidden;
+      img {
+        transform: translate(-10px, -10px);
+        width: 90px;
+        object-fit: fill;
+      }
+    }
+  }
+
+
+  .post-content {
+    padding: 20px 10px 20px 10px;
+    box-sizing: border-box;
+    background-color: white;
+    width: 800px;
+    font-size: 14px;
+    color: black;
+    line-height: 20px;
+    margin-bottom: 15px;
+    white-space: pre-wrap;
+    p {
+      text-indent: 2em;
+      padding: 5px 0;
+      margin: 0;
+    }
+  }
+
+  .comments {
+    font-size: 14px;
+    color: #999999;
+    box-sizing: border-box;
+    background-color: white;
+    overflow: hidden;
+    .top {
+      height: 42px;
+      padding: 10px;
+      box-sizing: border-box;
+      line-height: 22px;
+      box-shadow: 0 1px 1px gray;
+    }
+  }
+}
+
+
+
+//每一条评论的样式
+.comment-item {
+  position: relative;
+  padding: 10px 10px 10px 75px;
+  box-sizing: border-box;
+  border-bottom: 1px solid gray;
+  .avator {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 10px;
+    left: 7px;
+    overflow: hidden;
+    img {
+      width: 70px;
+      height: 70px;
+      transform: translate(-10px, -10px);
+    }
+  }
+  .message {
+    height: 20px;
+    line-height: 20px;
+    .name {
+      font-size: 14px;
+      color: #778087;
+    }
+    .time {
+      margin-left: 10px;
+      font-size: 12px;
+      color: #cccccc;
+    }
+  }
+  .comments {
+    padding-top: 10px;
+    font-size: 14px;
+    color: #444444;
+  }
+}

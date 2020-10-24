@@ -36,7 +36,7 @@ function App() {
           <Route path="/home">
             <Home></Home>
           </Route>
-          <Route path="/postdetail">
+          <Route path="/postdetail/:postId">
             <PostDetail />
           </Route>
           <Route path="/createpost">

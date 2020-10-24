@@ -29,7 +29,7 @@ const ContentItem = (props) => {
   }, [props.item.postId]);
 
   const clickItem = (postId) => {
-    history.push(`/comments/${postId}`)
+    history.push(`/postDetail/${postId}`)
   };
 
   const tagMap = { 1: "分享", 2: "讨论", 3: "吐槽", 4: "夸夸" };
@@ -44,7 +44,7 @@ const ContentItem = (props) => {
       onClick={() => clickItem(props.item.postId)}
     >
       <div className="avator">
-        <img src={`http://localhost:3001/uploads/${userInfo.avator}`} alt="" />
+        <img src={process.env.REACT_APP_AVATAR_BASEURL + userInfo.avator} alt="" />
       </div>
       <div className="content">
         <div className="title">{props.item.title}</div>
