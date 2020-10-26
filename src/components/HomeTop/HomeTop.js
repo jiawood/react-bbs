@@ -9,8 +9,8 @@ import './HomeTop.scss'
 // import 'antd/dist/antd.css';
 
 const HomeTop = () => {
-  const isLogined = useSelector(state => state.isLogined)
-  const loginedUser = useSelector(state => state.loginedUser)
+  const isLogined = useSelector(state => state.user.isLogined)
+  const loginedUser = useSelector(state => state.user.loginedUser)
   const history = useHistory()
   const goPost = () => {
     history.push("/post")

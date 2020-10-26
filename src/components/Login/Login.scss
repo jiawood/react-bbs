@@ -1,0 +1,26 @@
+.user-login {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 200px;
+  height: 260px;
+  width: 475px;
+  margin: auto;
+  background-color: white;
+  border: 1px solid gray;
+  .header {
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    width: 100%;
+    padding: 10px;
+  }
+  .close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    .el-icon-close {
+      font-size: 20px;
+    }
+  }
+}

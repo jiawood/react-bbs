@@ -1,15 +1,14 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getComments, getProfile, postDetail,addComment } from "../../api/api";
+import { getComments, getProfile, postDetail, addComment } from "../../api/api";
 import { parseTime } from "../../Utils";
 import { useSelector } from "react-redux";
 
-import {Input, Button, notification} from 'antd';
-import { SmileOutlined ,FrownTwoTone} from '@ant-design/icons';
+import { Button, notification } from "antd";
+import { SmileOutlined, FrownTwoTone } from "@ant-design/icons";
 import "./PostDetail.scss";
-import {useRef} from "react";
-import userReducer from "../../reducers/userReducer";
+import { useRef } from "react";
 
 const CommentItem = ({ comment }) => {
   const [profileInfo, setProfileInfo] = useState([]);
@@ -24,7 +23,6 @@ const CommentItem = ({ comment }) => {
         <img
           src={process.env.REACT_APP_AVATAR_BASEURL + profileInfo.avator}
           alt=""
-          srcset=""
         />
       </div>
       <div className="message">
@@ -36,54 +34,57 @@ const CommentItem = ({ comment }) => {
   );
 };
 
-const AddComment = ({setCommentInfo,commentInfo}) => {
-  const {TextArea} = Input
-  const isLogined = useSelector(state => state.isLogined)
-  const loginedUser = useSelector(state => state.loginedUser)
-  const contentRef = useRef()
-  const postId = useParams()
+const AddComment = ({ setCommentInfo, commentInfo }) => {
+  const isLogined = useSelector((state) => state.user.isLogined);
+  const loginedUser = useSelector((state) => state.user.loginedUser);
+  const contentRef = useRef();
+  const { postId } = useParams();
 
   const submit = (e) => {
-    e.preventDefault()
-    if(!isLogined){
+    e.preventDefault();
+    if (!isLogined) {
       notification.open({
-        message: '回复失败！',
-        description:
-          '您未登录，暂时无法回复。请先登录之后，再回复哟！',
-        icon: <FrownTwoTone style={{ color: '#ff4c4c' }} />,
+        message: "回复失败！",
+        description: "您未登录，暂时无法回复。请先登录之后，再回复哟！",
+        icon: <FrownTwoTone style={{ color: "#ff4c4c" }} />,
       });
-    }else{
-      addComment(postId,contentRef.current.value).then(res => {
-        if(res.data.code === 0){
-
-          let data = {
-            commentId: 56,
-            content: contentRef.current.value,
-            postId: postId,
-            time: new Date().toString(),
-            userId: loginedUser.userId
+    } else {
+      if (!contentRef.current.value) {
+        notification.open({
+          message: "回复失败！",
+          description: "回复内容为空！",
+          icon: <FrownTwoTone style={{ color: "#ff4c4c" }} />,
+        });
+      } else {
+        addComment(postId, contentRef.current.value).then((res) => {
+          if (res.data.code === 0) {
+            let data = {
+              commentId: 56,
+              content: contentRef.current.value,
+              postId: postId,
+              time: new Date().toString(),
+              userId: loginedUser.userId,
+            };
+            let newInfo = [...commentInfo]
+            newInfo.unshift(data);
+            setCommentInfo(newInfo);
+            notification.open({
+              message: "回复成功！",
+              description: "您已成功发表一条回复",
+              icon: <SmileOutlined style={{ color: "#108ee9" }} />,
+            });
+            contentRef.current.value = "";
+          } else {
+            notification.open({
+              message: "回复失败！",
+              description: "很抱歉，发生未知错误！",
+              icon: <FrownTwoTone style={{ color: "#ff4c4c" }} />,
+            });
           }
-          commentInfo.push(data)
-          setCommentInfo(commentInfo)
-          notification.open({
-            message: '回复成功！',
-            description:
-              '您已成功发表一条回复',
-            icon: <FrownTwoTone style={{ color: '#ff4c4c' }} />,
-          });
-        }else {
-          notification.open({
-            message: '回复失败！',
-            description:
-              '很抱歉，发生未知错误！',
-            icon: <FrownTwoTone style={{ color: '#ff4c4c' }} />,
-          });
-        }
-      })
+        });
+      }
     }
-
-
-  }
+  };
 
   return (
     <div className="add-comments">
@@ -91,14 +92,14 @@ const AddComment = ({setCommentInfo,commentInfo}) => {
         <div className="left">增加一条新回复</div>
       </div>
       <div className="form">
-        <TextArea rows={4} ref={contentRef}></TextArea>
+        <textarea ref={contentRef} className="textarea"></textarea>
       </div>
       <div className="submit" onClick={submit}>
-          <Button className="button">回复</Button>
+        <Button className="button">回复</Button>
       </div>
     </div>
-  )
-}
+  );
+};
 
 const PostDetail = () => {
   let { postId } = useParams();
@@ -113,10 +114,9 @@ const PostDetail = () => {
       let data = res.data;
       setPostInfo(data);
       setUserId(data.userId);
-      setContentLines(res.data.content.split('\n'))
+      setContentLines(res.data.content.split("\n"));
     });
   }, []);
-
 
   useEffect(() => {
     getProfile(userId).then((res) => {
@@ -129,8 +129,6 @@ const PostDetail = () => {
       setCommentInfo(res.data);
     });
   }, []);
-
-
 
   return (
     <div className="post-detail">
@@ -145,11 +143,14 @@ const PostDetail = () => {
             <img
               src={process.env.REACT_APP_AVATAR_BASEURL + userInfo.avator}
               alt=""
-              srcset=""
             />
           </div>
         </div>
-        <div className="post-content">{contentLines ? contentLines.map((line,index) => <p key={index}>{line}</p>) : null}</div>
+        <div className="post-content">
+          {contentLines
+            ? contentLines.map((line, index) => <p key={index}>{line}</p>)
+            : null}
+        </div>
       </div>
       <div className="comments">
         <div className="top">
@@ -158,15 +159,15 @@ const PostDetail = () => {
         </div>
         <div className="comment">
           {commentInfo.map((comment) => (
-            <CommentItem
-              key={comment.time}
-              comment={comment}
-            ></CommentItem>
+            <CommentItem key={comment.time} comment={comment}></CommentItem>
           ))}
         </div>
       </div>
       <div className="add-comments">
-        <AddComment setCommentInfo = {setCommentInfo} commentInfo = {commentInfo}></AddComment>
+        <AddComment
+          setCommentInfo={setCommentInfo}
+          commentInfo={commentInfo}
+        ></AddComment>
       </div>
     </div>
   );
