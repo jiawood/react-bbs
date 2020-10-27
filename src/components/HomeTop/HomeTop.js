@@ -13,7 +13,7 @@ const HomeTop = () => {
   const loginedUser = useSelector(state => state.user.loginedUser)
   const history = useHistory()
   const goPost = () => {
-    history.push("/post")
+    history.push("/createpost")
   }
   return (
     <div className="home-top">

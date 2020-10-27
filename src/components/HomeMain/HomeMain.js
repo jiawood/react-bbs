@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory,useLocation } from "react-router-dom";
 import { getPosts } from "../../api/api";
 import "./HomeMain.scss";
 import ContentItem from "./ContentItem";
@@ -26,6 +26,8 @@ const ContentContainer = (props) => {
 
 const HomeMain = () => {
   const history = useHistory();
+  const {pathname} = useLocation()
+
 
   const classifyData = [
     { name: "全部", categoryId: 0, path: "/total" },
@@ -64,10 +66,10 @@ const HomeMain = () => {
 
       let data = res.data;
       //console.log(data)
-      setPosts(() => data);
+      setPosts(data);
       setIsLoading(false)
     });
-  },[categoryId]);
+  },[categoryId,pathname]);
 
   return (
     <div className="home-main">

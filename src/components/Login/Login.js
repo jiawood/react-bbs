@@ -26,7 +26,7 @@ const tailLayout = {
 const Login = () => {
   const [form] = Form.useForm()
   const history = useHistory()
-  const isLogined = useSelector(state => state.isLogined)
+  const isLogined = useSelector(state => state.user.isLogined)
   const dispatch = useDispatch()
 
   const onFinish = (values) => {
