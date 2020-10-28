@@ -58,7 +58,7 @@ const Login = () => {
           dispatch({type:'set-isLogined',payload:true})
           dispatch({type:'set-loginedUser',payload:res.data.user})
           form.resetFields();
-          history.go(-1)
+          history.push('/home/total')
         }
       })
       console.log('Success:', values);

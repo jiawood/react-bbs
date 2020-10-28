@@ -6,7 +6,11 @@ import rootReducer from "./reducers/rootReducer";
 import { BrowserRouter as Router } from "react-router-dom";
 
 //导入antd样式
-import 'antd/dist/antd.css';
+// import 'antd/dist/antd.less';
+// // import '../src/assets/antd.less'
+
+// import 'antd/lib/style/themes/default.less';
+//import 'antd/dist/antd.css';
 
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";

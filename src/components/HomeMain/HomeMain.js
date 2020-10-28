@@ -38,7 +38,7 @@ const HomeMain = () => {
   ];
 
   const [currentInedx, setCurrentIndex] = useState(0);
-  const [categoryId, setCategoryId] = useState(3);
+  const [categoryId, setCategoryId] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
   const itemClick = (index, path) => {
