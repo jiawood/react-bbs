@@ -1,7 +1,7 @@
 const initState = {
-  isLogined: true,
+  isLogined: false,
   loginedUser: {
-    name:'xiaiJne'
+
   }
 };
 

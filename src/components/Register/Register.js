@@ -1,11 +1,11 @@
 
-import React from "react";
+import React,{useState} from "react";
 import { useSelector } from "react-redux";
 import { useHistory} from 'react-router-dom'
-import { Button, Form, Input,notification,Select } from "antd";
-import { SmileOutlined ,FrownTwoTone} from '@ant-design/icons';
+import { Button, Form, Input,notification,Upload } from "antd";
+import { SmileOutlined ,FrownTwoTone,UploadOutlined} from '@ant-design/icons';
 import { CloseOutlined } from "@ant-design/icons";
-import { addPosts } from "../../api/api";
+import { register } from "../../api/api";
 import './Register.scss'
 
 
@@ -28,31 +28,38 @@ const Register = () => {
   const [form] = Form.useForm()
   const history = useHistory()
   const isLogined = useSelector(state => state.user.isLogined)
-  const LoginedUser = useSelector(state => state.user.loginedUser)
 
-  const mapCategoty = {'share':1,'discuss':2,'complain':3,'compliment':4}
+
+  const [avator, setAvator] = useState({});
 
   const onFinish = (values) => {
-    if(isLogined){
-      let title = form.getFieldValue().title
-      let category = form.getFieldValue().category
-      let content = form.getFieldValue().content
-      let categoryId = mapCategoty[category]
-      debugger
 
-      addPosts(LoginedUser.userId,title,content,categoryId).then(res => {
+    if(!isLogined){
+      let name = form.getFieldValue().name
+      let password = form.getFieldValue().password
+      let email = form.getFieldValue().email
+      let formData = new FormData()
+      formData.append('name',name)
+      formData.append('password',password)
+      formData.append('email',email)
+      formData.append('avator',avator,avator.name)
+
+
+
+      register(formData).then(res => {
+        console.log(res)
         if(res.data.code == 0){
           notification.open({
-            message: '发帖成功！',
+            message: '注册成功！',
             description:
-              '发帖成功，已为您自动跳转:)',
+              '您已成功注册，请登录:)',
             icon: <SmileOutlined style={{ color: '#108ee9' }} />,
           });
-          history.go(-1)
+          history.push('/login')
           form.resetFields();
         }else {
           notification.open({
-            message: '发帖失败！',
+            message: '注册失败！',
             description:
               '发生了未知错误，抱歉',
             icon: <FrownTwoTone style={{ color: '#ff4c4c' }} />,
@@ -70,11 +77,27 @@ const Register = () => {
     form.resetFields();
   }
 
+  const normFile = e => {
+
+    if (Array.isArray(e)) {
+      return e;
+    }
+    // console.log(e)
+    setAvator(e.file)
+    return e && e.fileList;
+  };
+
+
+  //这样可以阻止头像默认上传
+  const handleBeforeUpload = (file,size) => {
+    return false
+  }
+
 
   return (
-    <div className="create-post">
+    <div className="register">
       <div className="container">
-      <div className="header">发布新主题</div>
+      <div className="header">注册</div>
       <Button className="close" icon={<CloseOutlined />}></Button>
       <Form
       {...layout}
@@ -87,45 +110,48 @@ const Register = () => {
       form={form}
       >
         <Form.Item
-        label="标题"
-        name="title"
+        label="姓名"
+        name="name"
         rules={[
           {
             required:true,
-            message: '请输入一个标题'
+            message: '请输入您的姓名'
           }
         ]}
         >
-          <Input.TextArea></Input.TextArea>
+          <Input></Input>
 
         </Form.Item>
-        <Form.Item label="分类" name="category"
+        <Form.Item label="密码" name="password"
                 rules={[
                   {
                     required:true,
-                    message: '请选择一个分类'
+                    message: '请输入密码'
                   }
                 ]}
         >
-          <Select>
-            <Select.Option value="share">分享</Select.Option>
-            <Select.Option value="discuss">讨论</Select.Option>
-            <Select.Option value="complain">吐槽</Select.Option>
-            <Select.Option value="compliment">夸夸</Select.Option>
-          </Select>
+          <Input.Password></Input.Password>
         </Form.Item>
         <Form.Item
-        label="内容"
-        name="content"
+        label="邮箱"
+        name="email"
         rules={[
           {
             required:true,
-            message: '请输入内容'
+            message: '请输入邮箱'
           }
         ]}
         >
-          <Input.TextArea rows={4} ></Input.TextArea>
+          <Input></Input>
 
+        </Form.Item>
+        <Form.Item label="上传头像" name="avator"
+        valuePropName="fileList"
+        getValueFromEvent={normFile}
+        >
+        <Upload name="logo" listType="picture" beforeUpload={handleBeforeUpload}>
+          <Button icon={<UploadOutlined />}>Click to upload</Button>
+        </Upload>
         </Form.Item>
         <Form.Item {...tailLayout}>
         <Button type="primary" htmlType="submit">
