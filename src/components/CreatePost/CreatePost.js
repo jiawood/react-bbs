@@ -38,10 +38,9 @@ const CreatePost = () => {
       let category = form.getFieldValue().category
       let content = form.getFieldValue().content
       let categoryId = mapCategoty[category]
-      debugger
 
       addPosts(LoginedUser.userId,title,content,categoryId).then(res => {
-        if(res.data.code == 0){
+        if(res.data.code === 0){
           notification.open({
             message: '发帖成功！',
             description:

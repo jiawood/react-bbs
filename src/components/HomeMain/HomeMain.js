@@ -1,33 +1,15 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { useHistory,useLocation } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { getPosts } from "../../api/api";
 import "./HomeMain.scss";
-import ContentItem from "./ContentItem";
-
-
-
-const ContentContainer = (props) => {
-  // console.log(props.posts)
-  return (
-    <div className="content-container">
-      <div className="posts">
-        {
-          props.posts.length > 0 ?
-        (props.posts.map((item) => (
-          <ContentItem item={item} key={item.postId} />
-        ))) : null}
-      </div>
-    </div>
-  );
-};
+import ContentContainer from './ContentContainer'
 
 
 
 const HomeMain = () => {
   const history = useHistory();
-  const {pathname} = useLocation()
-
+  const { path } = useParams();
 
   const classifyData = [
     { name: "全部", categoryId: 0, path: "/total" },
@@ -39,12 +21,13 @@ const HomeMain = () => {
 
   const [currentInedx, setCurrentIndex] = useState(0);
   const [categoryId, setCategoryId] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
 
-  const itemClick = (index, path) => {
+  const itemClick = (index, tpath) => {
     setCurrentIndex(index);
     setCategoryId(index);
-    history.push(`/home${path}`);
+    if(path !== tpath){
+      history.push(`/home${tpath}`);
+    }
   };
 
   const ItemList = classifyData.map((item, index) => (
@@ -62,23 +45,23 @@ const HomeMain = () => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    getPosts(categoryId).then((res) => {
-
+    let map = { total: 0, share: 1, discuss: 2, complain: 3, complement: 4 };
+    setCurrentIndex(map[path]);
+    getPosts(map[path]).then((res) => {
       let data = res.data;
       //console.log(data)
       setPosts(data);
-      setIsLoading(false)
     });
-  },[categoryId,pathname]);
+    return () => {
+      map = null;
+    };
+  }, [categoryId, path]);
 
   return (
     <div className="home-main">
-      <div className="classify">
-        {ItemList}
-      </div>
+      <div className="classify">{ItemList}</div>
       <div className="container">
-        {isLoading ? null :
-        <ContentContainer posts={posts} />}
+         <ContentContainer posts={posts}></ContentContainer>
       </div>
     </div>
   );

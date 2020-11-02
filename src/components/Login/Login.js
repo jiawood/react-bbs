@@ -81,10 +81,14 @@ const Login = () => {
     form.resetFields();
   }
 
+  const close = () => {
+    history.go(-1)
+  }
+
   return (
     <div className="user-login">
       <div className="header">登录</div>
-      <Button className="close" icon={<CloseOutlined />}></Button>
+  <Button className="close" icon={<CloseOutlined />} onClick={close}></Button>
       <Form
       {...layout}
       name="basic"

@@ -1,68 +1,71 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 基于Express和React的论坛系统
+:musical_keyboard: 基于 express + React + React Hooks + Redux + ReactRouter + Antd + axios + Sass + ES6 等开发一个简单论坛，UI 界面参考了v2ex
 
-## Available Scripts
+:yum: 项目演示地址：[Simple-BBS](http://139.196.203.58:3002/dist/home/total)
 
-In the project directory, you can run:
+## 预览
 
-### `yarn start`
+#### 主页，全部的帖子
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+![主页](src/assets/readme/1.png)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+#### 帖子详情和评论
+![帖子详情](src/assets/readme/2.png)
 
-### `yarn test`
+#### 技术栈
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**前端**
 
-### `yarn build`
+* `React`：用于构建用户界面的 MVVM 框架
+* `ReactRouter`：为单页面应用提供的路由系统
+* `Redux`：React 集中状态管理，用来保存登录状态和登录的用户信息，便于多个组件共享
+* `Antd`:React组件库,使用了部分组件
+* `SASS`：css 预编译处理器
+* `axios`：用于请求后端数据
+* `ES6`：ECMAScript 新一代语法，模块化、解构赋值、Promise、Class 等方法非常好用
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**后端**
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+* `Express`：基于Node.js平台的Web开发框架，本项目使用Express进行后端的开发
+* `Multer`：node.js中间件，用于处理multipart/form-data类型的表单数据，本项目中主要用于上传文件
+* `bcrypt`: 密码加密
+* `cookie-parser`:解析cookie
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `yarn eject`
+**其他工具**
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+* `sqllite`: 用于连接和操作sqllite数据库
+* `create-react-app`：React 脚手架工具，快速初始化项目代码
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 目标功能
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- [x] 注册
+- [x] 登录
+- [x] 发布新主题
+- [x] 增加评论
+- [x] 头像上传
+- [x] 帖子分类
+- [ ] 帖子顶置
+- [ ] 帖子分页
+- [ ] 删除帖子
+- [ ] 修改帖子
+- [ ] 支持markdown
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## 最后
 
-## Learn More
+如果觉得我的项目还不错的话 :clap:，就给个 star :star: 鼓励一下吧~
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Build Setup
+```bash
+# install dependencies
+yarn add
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# cd server and start server
+node app.js
 
-### Code Splitting
+# serve with hot reload at localhost:8080
+yarn run start
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+# build for production with minification
+yarn run build
+```

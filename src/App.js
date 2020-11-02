@@ -19,6 +19,7 @@ import bcImg from "./assets/bgc.jpg";
 
 import "./App.scss";
 
+
 function App() {
   return (
     <div className="App">
@@ -31,9 +32,11 @@ function App() {
       <div className="content">
         <Switch>
           <Route exact path="/">
-            <Home />
+            <Redirect to = {{
+              pathname:"/home/total"
+            }}></Redirect>
           </Route>
-          <Route path="/home">
+          <Route path="/home/:path">
             <Home></Home>
           </Route>
           <Route path="/postdetail/:postId">

@@ -16,7 +16,10 @@ const CommentItem = ({ comment }) => {
     getProfile(comment.userId).then((res) => {
       setProfileInfo(res.data);
     });
-  }, []);
+  }, [comment.userId]);
+  // console.log(process)
+  // console.log(process.env)
+  // console.log(process.env.REACT_APP_AVATAR_BASEURL)
   return (
     <div className="comment-item">
       <div className="avator">

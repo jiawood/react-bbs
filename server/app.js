@@ -13,7 +13,7 @@ const sqlMap = require('./sqlMap')
 const DIR = __dirname + '/uploads/'
 
 const app = express()
-const port = 3001
+const port = 3003
 
 let db
 const dbPromise = require('./db.js')
@@ -53,14 +53,14 @@ app.use(express.json())
 app.use('/uploads', express.static(__dirname + '/uploads'))
 
 //将静态文件放在静态文件夹
-// app.use('/dist', express.static(__dirname + '/dist'))
+app.use(express.static(__dirname + '/build'))
 
 // app.get('/', (req, res) => {
-//   res.redirect('/dist')
+//   res.redirect('/home/total')
 // })
 
-// app.get(/\/dist\//, (req, res) => {
-//   res.sendFile(__dirname + '/dist/index.html')
+// app.get(/\/build\//, (req, res) => {
+//   res.sendFile(__dirname + 'index.html')
 // })
 
 //判断是否登录过

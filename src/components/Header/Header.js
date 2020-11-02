@@ -44,8 +44,9 @@ const Header = () => {
       }
     })
   };
+
   const goToHome = () => {
-    history.push("/home");
+    history.push("/home/total");
   };
   const login = () => {
     history.push("/login")

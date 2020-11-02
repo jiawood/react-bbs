@@ -48,7 +48,7 @@ const Register = () => {
 
       register(formData).then(res => {
         console.log(res)
-        if(res.data.code == 0){
+        if(res.data.code === 0){
           notification.open({
             message: '注册成功！',
             description:
@@ -93,12 +93,16 @@ const Register = () => {
     return false
   }
 
+  const close = () => {
+    history.go(-1)
+  }
+
 
   return (
     <div className="register">
       <div className="container">
       <div className="header">注册</div>
-      <Button className="close" icon={<CloseOutlined />}></Button>
+      <Button className="close" icon={<CloseOutlined />} onClick={close}></Button>
       <Form
       {...layout}
       name="basic"
